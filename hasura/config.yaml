@@ -1,8 +1,7 @@
 version: 3
-endpoint: http://localhost:8080
+endpoint: https://enough-bug-85.hasura.app/v1/graphql
 metadata_directory: metadata
 actions:
   kind: synchronous
   handler_webhook_baseurl: http://localhost:3000
 admin_secret: kfdYpd08wppldvClKUOlKbToBUMDlZUhcaHWVRH74B88cCeYy9Rz3KelGQtZceuc
-endpoint: http://localhost:8080

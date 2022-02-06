@@ -1,1 +1,4 @@
-[]
+configuration:
+    connection_info:
+      database_url:
+              from_env: PG_DATABASE_URL
