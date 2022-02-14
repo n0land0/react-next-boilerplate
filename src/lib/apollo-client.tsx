@@ -1,9 +1,10 @@
 import {
   ApolloClient,
-  ApolloProvider,
+  ApolloProvider as AP,
   HttpLink,
   InMemoryCache,
 } from '@apollo/client';
+import { FC, useMemo } from 'react';
 
 type Cache = Record<string, unknown>;
 export type InitialState = Record<string, unknown>;
@@ -43,4 +44,17 @@ export const initializeApollo = (
   }
 
   return _apolloClient;
+};
+
+export const useApollo = (initialState: InitialState): ApolloClient<Cache> => {
+  const store = useMemo(() => initializeApollo(initialState), [initialState]);
+  return store;
+};
+
+export const ApolloProvider: FC<{
+  initialState?: InitialState;
+}> = ({ children, initialState = {} }) => {
+  const client = useApollo(initialState);
+
+  return <AP client={client}>{children}</AP>;
 };
