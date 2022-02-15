@@ -2,12 +2,17 @@
   "name": "react-next-boilerplate",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "run-p types:watch next:dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write \"src/**/*\"",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "schema:update": "./scripts/update-schema.sh",
+    "next:dev": "next dev",
+    "prebuild": "yarn types:build",
+    "types:build": "DOTENV_CONFIG_PATH=./.env.local graphql-codegen --config codegen.yml -r dotenv/config",
+    "types:watch": "yarn types:build --watch"
   },
   "dependencies": {
     "@apollo/client": "^3.5.8",
