@@ -21,7 +21,31 @@
   ],
   "rules": {
     "react/prop-types": "off",
-    "simple-import-sort/imports": "error",
+    "simple-import-sort/imports": [
+      "error",
+      // See if these groups rules work - if not, revert to just error
+      {
+        "groups": [
+          // Side effect imports. e.g., import "@storybook/register"
+          ["^\\u0000"],
+
+          // Style imports.
+          ["^.+\\.s?css$"],
+
+          // Packages. React related packages come first.
+          ["^react", "^@?\\w"],
+
+          // Internal packages. Should match any direct child of ./src
+          ["^(api|components|features|lib|pages|styles)(/.*|$)"],
+
+          // Parent imports. Put `..` last.
+          ["^\\.\\.(?!/?$)", "^\\.\\./?$"],
+
+          // Other relative imports. Put same-folder imports and `.` last.
+          ["^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"]
+        ]
+      }
+    ],
     "simple-import-sort/exports": "error"
   }
 }
