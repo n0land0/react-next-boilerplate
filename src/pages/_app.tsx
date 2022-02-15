@@ -1,5 +1,6 @@
 import '../styles/globals.css';
 
+import { ChakraProvider } from '@chakra-ui/react';
 import type { AppProps } from 'next/app';
 import { FC } from 'react';
 
@@ -10,9 +11,11 @@ const App: FC<AppProps> = ({
   pageProps: { initialApolloState, ...pageProps },
 }: AppProps) => {
   return (
-    <ApolloProvider initialState={initialApolloState || {}}>
-      <Component {...pageProps} />
-    </ApolloProvider>
+    <ChakraProvider>
+      <ApolloProvider initialState={initialApolloState || {}}>
+        <Component {...pageProps} />
+      </ApolloProvider>
+    </ChakraProvider>
   );
 };
 
